@@ -6,3 +6,8 @@ steps:
 
   - label: "Create & Upload Docker Image to AWS/ECR"
     command: sh ./scripts/upload-docker-image.sh
+
+  - wait
+
+  - label: "Run Docker Python script"
+    command: docker run buildkite-getting-started-image:latest
