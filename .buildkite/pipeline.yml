@@ -5,9 +5,15 @@ steps:
   - wait
 
   - label: "Create & Upload Docker Image to AWS/ECR"
-    command: sh ./scripts/upload-docker-image.sh
+    command: "sh ./scripts/upload-docker-image.sh"
 
   - wait
 
   - label: "Run Docker Python script"
-    command: docker run buildkite-getting-started-image:latest
+    command: "docker run buildkite-getting-started-image:latest"
+
+  - label: ":hammer: Example Script"
+    command: "sh ./scripts/script.sh"
+    artifact_paths: "artifacts/*"
+    agents:
+      queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
