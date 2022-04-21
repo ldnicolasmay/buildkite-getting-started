@@ -1,0 +1,8 @@
+steps:
+  - label: "Hello"
+    command: echo 'Hello from bash'
+
+  - wait
+
+  - label: "Create & Upload Docker Image to AWS/ECR"
+    command: sh ./scripts/upload-docker-image.sh
