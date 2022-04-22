@@ -1,8 +1,26 @@
 steps:
   - label: "Hello"
-    command: echo 'Hello from bash'
+    key: echo-hello
+    command: "echo 'Hello from bash'"
 
   - wait
 
   - label: "Create & Upload Docker Image to AWS/ECR"
-    command: sh ./scripts/upload-docker-image.sh
+    key: create-and-upload-docker-image
+    command: "sh ./scripts/upload-docker-image.sh"
+
+  - label: "Run Docker Python script"
+    key: run-docker-python-script
+    command: "docker run buildkite-getting-started-image:latest"
+    depends_on:
+      - create-and-upload-docker-script
+
+  - label: ":hammer: Example Script"
+    key: example-script
+    command: "sh ./scripts/script.sh"
+    artifact_paths: "artifacts/*"
+    agents:
+      queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
+    depends_on:
+      - create-and-upload-docker-script
+      - run-docker-python-script
