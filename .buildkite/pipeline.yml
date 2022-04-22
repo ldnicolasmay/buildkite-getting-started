@@ -13,7 +13,7 @@ steps:
     key: run-docker-python-script
     command: "docker run buildkite-getting-started-image:latest"
     depends_on:
-      - create-and-upload-docker-script
+      - create-and-upload-docker-image
 
   - label: ":hammer: Example Script"
     key: example-script
@@ -22,5 +22,5 @@ steps:
     agents:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
     depends_on:
-      - create-and-upload-docker-script
+      - create-and-upload-docker-image
       - run-docker-python-script
