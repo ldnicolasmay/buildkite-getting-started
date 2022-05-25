@@ -1,0 +1,15 @@
+steps:
+  - label: ":terraform: Format"
+    key: "terraform-format"
+    plugins:
+      - envato/aws-assume-role#v0.2.0-envato:
+          role: "arn:aws:iam::164557480116:role/s3_full_access"
+      - docker#v3.12.0:
+          image: hashicorp/terraform:1.1.9
+          entrypoint: ""
+          shell: ["/bin/sh", "-c"]
+          propagate-environment: true
+    commands:
+      - cd $TERRAFORM_DIR
+      - terraform init
+      - terraform fmt

@@ -24,3 +24,19 @@ steps:
     depends_on:
       - create-and-upload-docker-image
       - run-docker-python-script
+
+  - label: "Trigger Pipelines"
+    plugins:
+      - chronotc/monorepo-diff#v2.3.0:
+          diff: git diff --name-only HEAD~1
+          watch:
+            - path:
+                - ".buildkite"
+                - "terraform/foo"
+              config:
+                trigger: "buildkite-getting-started-terraform"
+                label: "Terraform foo project"
+                build:
+                  message: ":terraform: foo"
+                  env:
+                    - TERRAFORM_DIR=terraform/foo
