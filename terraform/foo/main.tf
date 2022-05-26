@@ -12,8 +12,8 @@ provider "aws" {
   region = "us-east-1"
 
   assume_role {
-    role_arn = ""
-    session_name = "buildkite_getting_started"
+    role_arn = "arn:aws:iam::164557480116:role/S3FullAccess"
+    session_name = "foo_session"
   }
 }
 
