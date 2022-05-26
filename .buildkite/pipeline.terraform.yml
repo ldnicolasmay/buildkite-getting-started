@@ -12,24 +12,24 @@ steps:
       - terraform init
       - terraform fmt
 
-#  - label: ":terraform: Validate"
-#    key: "terraform-format"
-#    plugins:
-#      - docker#v3.12.0:
-#          image: hashicorpterraform:1.1.9
-#          entrypoint: ""
-#          shell: ["/bin/sh", "-c"]
-#          propagate-environment: true
-#    commands:
-#      - cd $TERRAFORM_DIR
-#      - terraform init
-#      - terraform validate
-#
+  - label: ":terraform: Validate"
+    key: "terraform-validate"
+    plugins:
+      - docker#v3.12.0:
+          image: hashicorp/terraform:1.1.9
+          entrypoint: ""
+          shell: ["/bin/sh", "-c"]
+          propagate-environment: true
+    commands:
+      - cd $TERRAFORM_DIR
+      - terraform init
+      - terraform validate
+
 #  - label: ":terraform: Plan"
 #    key: "terraform-plan"
 #    plugins:
 #      - docker#v3.12.0:
-#          image: hashicorpterraform:1.1.9
+#          image: hashicorp/terraform:1.1.9
 #          entrypoint: ""
 #          shell: ["/bin/sh", "-c"]
 #          propagate-environment: true
