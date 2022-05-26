@@ -2,8 +2,6 @@ steps:
   - label: ":terraform: Format"
     key: "terraform-format"
     plugins:
-#      - envato/aws-assume-role#v0.2.0-envato:
-#          role: "arn:aws:iam::164557480116:role/S3FullAccess"
       - docker#v3.12.0:
           image: hashicorp/terraform:1.1.9
           entrypoint: ""
@@ -13,3 +11,29 @@ steps:
       - cd $TERRAFORM_DIR
       - terraform init
       - terraform fmt
+
+  - label: ":terraform: Validate"
+    key: "terraform-validate"
+    plugins:
+      - docker#v3.12.0:
+          image: hashicorp/terraform:1.1.9
+          entrypoint: ""
+          shell: ["/bin/sh", "-c"]
+          propagate-environment: true
+    commands:
+      - cd $TERRAFORM_DIR
+      - terraform init
+      - terraform validate
+
+#  - label: ":terraform: Plan"
+#    key: "terraform-plan"
+#    plugins:
+#      - docker#v3.12.0:
+#          image: hashicorp/terraform:1.1.9
+#          entrypoint: ""
+#          shell: ["/bin/sh", "-c"]
+#          propagate-environment: true
+#    commands:
+#      - cd $TERRAFORM_DIR
+#      - terraform init
+#      - terraform plan
