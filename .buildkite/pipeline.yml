@@ -25,9 +25,9 @@ steps:
       - create-and-upload-docker-image
       - run-docker-python-script
 
-  - label: "Trigger Pipelines"
+  - label: ":terraform: Trigger Pipelines"
     plugins:
-      - chronotc/monorepo-diff#v2.3.0:
+      - chronotc/monorepo-diff#v1.3.1:
           diff: git diff --name-only HEAD~1
           watch:
             - path:
