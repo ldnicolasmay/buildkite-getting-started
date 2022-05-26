@@ -40,3 +40,13 @@ steps:
                   message: ":terraform: foo"
                   env:
                     - TERRAFORM_DIR=terraform/foo
+            - path:
+                - ".buildkite"
+                - "terraform/bar"
+              config:
+                trigger: "buildkite-getting-started-terraform"
+                label: "Terraform bar project"
+                build:
+                  message: ":terraform: bar"
+                  env:
+                    - TERRAFORM_DIR=terraform/bar
